@@ -2,6 +2,11 @@ class Api::V1::DoctorsController < ApplicationController
     before_action :authorize_request
     before_action :set_doctor, only: [:destroy]
 
+    def index
+      @doctors = Doctor.all
+      render json: @doctors
+    end
+
     def create
       @doctor = Doctor.new(doctor_params)
 
