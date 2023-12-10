@@ -1,5 +1,10 @@
 class Api::V1::AppointmentsController < ApplicationController
     before_action :authorize_request
+    
+    def index
+      @appointments = @current_user.appointments
+      render json: @appointments
+    end
 
     def create
       @appointment = Appointment.new(appointment_params.merge(user: @current_user))
