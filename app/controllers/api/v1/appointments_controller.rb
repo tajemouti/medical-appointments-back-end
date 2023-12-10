@@ -16,6 +16,11 @@ class Api::V1::AppointmentsController < ApplicationController
       end
     end
 
+    def show
+      @appointment = @current_user.appointments.find(params[:id])
+      render json: @appointment
+    end
+
     private
 
     def appointment_params
