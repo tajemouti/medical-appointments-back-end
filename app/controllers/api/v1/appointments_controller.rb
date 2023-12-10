@@ -21,6 +21,12 @@ class Api::V1::AppointmentsController < ApplicationController
       render json: @appointment
     end
 
+    def destroy
+      @appointment = @current_user.appointments.find(params[:id])
+      @appointment.destroy
+      render json: { message: 'Appointment deleted successfully.' }
+    end
+
     private
 
     def appointment_params
