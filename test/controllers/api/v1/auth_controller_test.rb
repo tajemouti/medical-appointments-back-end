@@ -1,6 +1,6 @@
-require "test_helper"
+require 'test_helper'
 
-class Api::v1::AuthControllerTest < ActionDispatch::IntegrationTest
+class Api::V1::AuthControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
