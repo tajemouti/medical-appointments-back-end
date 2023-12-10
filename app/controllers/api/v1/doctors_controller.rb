@@ -1,5 +1,6 @@
 class Api::V1::DoctorsController < ApplicationController
     before_action :authorize_request
+    before_action :set_doctor, only: [:destroy]
 
     def create
       @doctor = Doctor.new(doctor_params)
@@ -17,6 +18,10 @@ class Api::V1::DoctorsController < ApplicationController
     end
 
     private
+
+    def set_doctor
+      @doctor = Doctor.find(params[:id])
+    end
 
     def doctor_params
       params.require(:doctor).permit(:name, :picture, :speciality, :address)
