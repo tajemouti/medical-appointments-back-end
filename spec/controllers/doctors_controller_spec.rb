@@ -1,5 +1,3 @@
-# spec/controllers/api/v1/doctors_controller_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe Api::V1::DoctorsController, type: :controller do
@@ -24,6 +22,23 @@ RSpec.describe Api::V1::DoctorsController, type: :controller do
       get :show, params: { id: doctor.id }
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)['id']).to eq(doctor.id)
+    end
+  end
+
+  describe 'POST #create' do
+    context 'with valid parameters' do
+      it 'creates a new doctor' do
+        post :create, params: { doctor: attributes_for(:doctor) }
+        expect(response).to have_http_status(:created)
+        expect(Doctor.count).to eq(1)
+      end
+    end
+
+    context 'with invalid parameters' do
+      it 'does not create a new doctor and returns unprocessable_entity status' do
+        post :create, params: { doctor: { name: nil, picture: nil, speciality: nil, address: nil } }
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
     end
   end
 end
