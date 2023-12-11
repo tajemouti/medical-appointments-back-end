@@ -8,7 +8,7 @@ RSpec.describe Api::V1::AppointmentsController, type: :controller do
 
   describe 'GET #index' do
     it 'returns a list of user appointments' do
-      create_list(:appointment, 3, user: user)
+      create_list(:appointment, 3, user:)
       get :index
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body).count).to eq(3)
@@ -37,13 +37,13 @@ RSpec.describe Api::V1::AppointmentsController, type: :controller do
         errors = JSON.parse(response.body)['errors']
         expect(errors).to be_an(Array)
         expect(errors).to include("Appointment time can't be blank")
-        expect(errors).to include("Doctor must exist")
+        expect(errors).to include('Doctor must exist')
       end
     end
   end
 
   describe 'GET #show' do
-    let(:appointment) { create(:appointment, user: user) }
+    let(:appointment) { create(:appointment, user:) }
 
     it 'returns the details of a specific appointment' do
       get :show, params: { id: appointment.id }
@@ -53,7 +53,7 @@ RSpec.describe Api::V1::AppointmentsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    let(:appointment) { create(:appointment, user: user) }
+    let(:appointment) { create(:appointment, user:) }
 
     it 'deletes a specific appointment' do
       delete :destroy, params: { id: appointment.id }
