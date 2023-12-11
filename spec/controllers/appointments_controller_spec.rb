@@ -42,4 +42,23 @@ RSpec.describe Api::V1::AppointmentsController, type: :controller do
     end
   end
 
+  describe 'GET #show' do
+    let(:appointment) { create(:appointment, user: user) }
+
+    it 'returns the details of a specific appointment' do
+      get :show, params: { id: appointment.id }
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)['id']).to eq(appointment.id)
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    let(:appointment) { create(:appointment, user: user) }
+
+    it 'deletes a specific appointment' do
+      delete :destroy, params: { id: appointment.id }
+      expect(response).to have_http_status(:ok)
+      expect(Appointment.count).to eq(0)
+    end
+  end
 end
