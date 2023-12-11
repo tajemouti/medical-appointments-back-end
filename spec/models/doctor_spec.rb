@@ -29,5 +29,19 @@ RSpec.describe Doctor, type: :model do
         expect(doctor).to_not be_valid
       end
     end
-
+    
+    # test doctor associations
+    describe 'associations' do
+      it 'should destroy associated appointments' do
+        doctor = FactoryBot.create(:doctor)
+        FactoryBot.create_list(:appointment, 3, doctor: doctor)
+  
+        expect { doctor.destroy }.to change { Appointment.count }.by(-3)
+      end
+  
+      it 'should have many users through appointments' do
+        doctor = FactoryBot.create(:doctor_with_appointments)
+        expect(doctor.users.count).to eq(doctor.appointments.count)
+      end
+    end
 end
