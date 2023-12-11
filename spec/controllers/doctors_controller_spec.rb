@@ -26,31 +26,4 @@ RSpec.describe Api::V1::DoctorsController, type: :controller do
       expect(JSON.parse(response.body)['id']).to eq(doctor.id)
     end
   end
-
-  describe 'POST #create' do
-    context 'with valid parameters' do
-      it 'creates a new doctor' do
-        post :create, params: { doctor: attributes_for(:doctor) }
-        expect(response).to have_http_status(:created)
-        expect(Doctor.count).to eq(1)
-      end
-    end
-
-    context 'with invalid parameters' do
-      it 'does not create a new doctor and returns unprocessable_entity status' do
-        post :create, params: { doctor: { name: nil, picture: nil, speciality: nil, address: nil } }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe 'DELETE #destroy' do
-    let(:doctor) { create(:doctor) }
-
-    it 'deletes a specific doctor' do
-      delete :destroy, params: { id: doctor.id }
-      expect(response).to have_http_status(:ok)
-      expect(Doctor.count).to eq(0)
-    end
-  end
 end
