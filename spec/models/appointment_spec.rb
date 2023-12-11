@@ -6,6 +6,11 @@ RSpec.describe Appointment, type: :model do
       appointment = FactoryBot.create(:appointment)
       expect(appointment).to be_valid
     end
+
+    it 'is not valid without an appointment time' do
+      appointment = Appointment.new(appointment_time: nil)
+      expect(appointment).to_not be_valid
+    end
   end
 
   describe 'associations' do
