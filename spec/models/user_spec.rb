@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
- 
   # test user validations
   describe 'validations' do
     it 'should be valid with valid credentials' do
@@ -23,14 +22,13 @@ RSpec.describe User, type: :model do
       user = User.new(username: 'example_user', password: '12345')
       expect(user).to_not be_valid
     end
-
   end
 
   # test user associations
   describe 'associations' do
     it 'should destroy associated appointments' do
       user = FactoryBot.create(:user)
-      FactoryBot.create_list(:appointment, 3, user: user)
+      FactoryBot.create_list(:appointment, 3, user:)
 
       expect { user.destroy }.to change { Appointment.count }.by(-3)
     end
