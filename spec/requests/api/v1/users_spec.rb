@@ -17,19 +17,68 @@ RSpec.describe 'api/v1/users', type: :request do
         required: ['username', 'password']
       }
 
-      response '200', 'successful' do
-        let(:user_params) { FactoryBot.attributes_for(:user) }
-
-        after do |example|
-          example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
+      response '201', 'user created' do
+        let(:user_params) do
+          {
+            user: {
+              username: 'test_user',
+              password: 'password'
             }
           }
         end
-        run_test!
-      end
 
+        run_test! do
+          expect(response).to have_http_status(201)
+          json_response = JSON.parse(response.body)
+          expect(json_response).to include('token')
+        end
+      end
+      # response '200', 'successful' do
+      #   let(:user_params) do
+      #     {
+      #       user: {
+      #         username: 'test_user',
+      #         password: 'password'
+      #       }
+      #     }
+      #   end
+      #   before do
+      #     post '/api/v1/users', params: user_params.to_json, headers: { 'Content-Type': 'application/json' }
+      #   end
+
+      #   after do |example|
+      #     example.metadata[:response][:content] = {
+      #       'application/json' => {
+      #         example: JSON.parse(response.body, symbolize_names: true)
+      #       }
+      #     }
+      #   end
+      #   run_test!
+      # end
+
+      response '201', 'user created' do
+        let(:user_params) do
+          {
+            user: {
+              username: 'test_user',
+              password: 'password'
+            }
+          }
+        end
+
+        before do
+          post '/api/v1/users', params: user_params.to_json, headers: { 'Content-Type': 'application/json' }
+        end
+
+        it 'returns a 201 response' do
+          expect(response).to have_http_status(201)
+        end
+
+        it 'returns the token in the response' do
+          json_response = JSON.parse(response.body)
+          expect(json_response).to include('token')
+        end
+      end
       response '422', 'unprocessable entity' do
         let(:user_params) { { username: nil, password: nil } }
         run_test!
