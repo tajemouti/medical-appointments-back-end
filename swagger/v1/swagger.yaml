@@ -4,6 +4,35 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/v1/appointments":
+    get:
+      summary: list appointments
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create appointment
+      responses:
+        '200':
+          description: successful
+  "/api/v1/appointments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show appointment
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete appointment
+      responses:
+        '200':
+          description: successful
   "/api/v1/login":
     post:
       summary: login auth
@@ -26,6 +55,35 @@ paths:
               required:
               - username
               - password
+  "/api/v1/doctors":
+    get:
+      summary: list doctors
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create doctor
+      responses:
+        '200':
+          description: successful
+  "/api/v1/doctors/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show doctor
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete doctor
+      responses:
+        '200':
+          description: successful
   "/api/v1/users":
     post:
       summary: create user
