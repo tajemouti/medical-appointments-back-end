@@ -1,9 +1,7 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/auth', type: :request do
-
   path '/api/v1/login' do
-
     post('login auth') do
       consumes 'application/json'
       parameter name: :login_params, in: :body, schema: {
@@ -12,7 +10,7 @@ RSpec.describe 'api/v1/auth', type: :request do
           username: { type: :string },
           password: { type: :string }
         },
-        required: ['username', 'password']
+        required: %w[username password]
       }
 
       response '200', 'successful' do
