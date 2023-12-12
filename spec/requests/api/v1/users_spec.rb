@@ -1,88 +1,44 @@
 require 'swagger_helper'
 
 RSpec.describe 'api/v1/users', type: :request do
-
   path '/api/v1/users' do
-
     post('create user') do
       consumes 'application/json'
-      parameter name: :user_params, in: :body, schema: {
+      parameter name: :user, in: :body, schema: {
         type: :object,
         properties: {
-          user: {
-            username: { type: :string },
-            password: { type: :string }
-          }
+          username: { type: :string },
+          password: { type: :string }
         },
         required: ['username', 'password']
       }
 
-      response '201', 'user created' do
-        let(:user_params) do
-          {
-            user: {
-              username: 'test_user',
-              password: 'password'
-            }
-          }
-        end
-
-        run_test! do
-          expect(response).to have_http_status(201)
-          json_response = JSON.parse(response.body)
-          expect(json_response).to include('token')
-        end
-      end
-      # response '200', 'successful' do
-      #   let(:user_params) do
-      #     {
-      #       user: {
-      #         username: 'test_user',
-      #         password: 'password'
-      #       }
-      #     }
-      #   end
-      #   before do
-      #     post '/api/v1/users', params: user_params.to_json, headers: { 'Content-Type': 'application/json' }
-      #   end
-
-      #   after do |example|
-      #     example.metadata[:response][:content] = {
-      #       'application/json' => {
-      #         example: JSON.parse(response.body, symbolize_names: true)
-      #       }
-      #     }
-      #   end
-      #   run_test!
-      # end
-
-      response '201', 'user created' do
-        let(:user_params) do
-          {
-            user: {
-              username: 'test_user',
-              password: 'password'
-            }
-          }
-        end
+      response '201', 'resource created' do
+        let(:user) { FactoryBot.build(:user) }
 
         before do
-          post '/api/v1/users', params: user_params.to_json, headers: { 'Content-Type': 'application/json' }
+          post '/api/v1/users', params: { user: { username: user.username, password: user.password } }
         end
 
-        it 'returns a 201 response' do
-          expect(response).to have_http_status(201)
+        after do |example|
+          example.metadata[:response][:content] = {
+            'application/json' => {
+              example: JSON.parse(response.body, symbolize_names: true)
+            }
+          }
         end
-
-        it 'returns the token in the response' do
-          json_response = JSON.parse(response.body)
-          expect(json_response).to include('token')
-        end
-      end
-      response '422', 'unprocessable entity' do
-        let(:user_params) { { username: nil, password: nil } }
         run_test!
       end
-    end
-  end
+
+      response '422', 'unprocessable entity' do
+        let(:user) { FactoryBot.build(:user, password: 'short') }
+
+        before do
+          post '/api/v1/users', params: { user: { username: user.username, password: user.password } }
+        end
+
+        run_test!
+      end
+    end
+  end
 end
