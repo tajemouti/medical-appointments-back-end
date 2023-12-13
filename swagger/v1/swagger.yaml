@@ -112,7 +112,7 @@ paths:
               required:
               - user
 servers:
-- url: http://{defaultHost}
+- url: https://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:3000
+      default: medical-appointments-booking-wizard.onrender.com
