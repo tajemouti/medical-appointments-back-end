@@ -4,90 +4,9 @@ info:
   title: API V1
   version: v1
 paths:
-  "/api/v1/appointments":
-    get:
-      summary: list appointments
-      responses:
-        '200':
-          description: successful
-    post:
-      summary: create appointment
-      responses:
-        '200':
-          description: successful
-  "/api/v1/appointments/{id}":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
-    get:
-      summary: show appointment
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: delete appointment
-      responses:
-        '200':
-          description: successful
-  "/api/v1/login":
-    post:
-      summary: login auth
-      parameters: []
-      responses:
-        '200':
-          description: successful
-        '401':
-          description: unauthorized
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-                password:
-                  type: string
-              required:
-              - username
-              - password
-  "/api/v1/doctors":
-    get:
-      summary: list doctors
-      responses:
-        '200':
-          description: successful
-    post:
-      summary: create doctor
-      responses:
-        '200':
-          description: successful
-  "/api/v1/doctors/{id}":
-    parameters:
-    - name: id
-      in: path
-      description: id
-      required: true
-      schema:
-        type: string
-    get:
-      summary: show doctor
-      responses:
-        '200':
-          description: successful
-    delete:
-      summary: delete doctor
-      responses:
-        '200':
-          description: successful
   "/api/v1/users":
     post:
       summary: create user
-      parameters: []
       responses:
         '201':
           description: user created
@@ -107,12 +26,124 @@ paths:
                     password:
                       type: string
                   required:
-                  - username
-                  - password
+                    - username
+                    - password
               required:
-              - user
+                - user
+  "/api/v1/login":
+    post:
+      summary: login auth
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+  "/api/v1/doctors":
+    get:
+      summary: list doctors
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create doctor
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                picture:
+                  type: string
+                speciality:
+                  type: string
+                address:
+                  type: string
+              required:
+                - name
+                - picture
+                - speciality
+                - address
+  "/api/v1/doctors/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: show doctor
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete doctor
+      responses:
+        '200':
+          description: successful
+  "/api/v1/appointments":
+    get:
+      summary: list appointments
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create appointment
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                doctor_id:
+                  type: integer
+                appointment_time:
+                  type: string
+                  format: date-time
+              required:
+                - doctor_id
+                - appointment_time
+  "/api/v1/appointments/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: show appointment
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete appointment
+      responses:
+        '200':
+          description: successful
 servers:
-- url: https://{defaultHost}
-  variables:
-    defaultHost:
-      default: medical-appointments-booking-wizard.onrender.com
+  - url: https://{defaultHost}
+    variables:
+      defaultHost:
+        default: medical-appointments-booking-wizard.onrender.com
