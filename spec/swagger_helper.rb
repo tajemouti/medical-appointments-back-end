@@ -13,10 +13,10 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: 'https://{defaultHost}',
+          url: 'http://{defaultHost}',
           variables: {
             defaultHost: {
-              default: medical - appointments - booking - wizard.onrender.com
+              default: 'localhost:3000'
             }
           }
         }
