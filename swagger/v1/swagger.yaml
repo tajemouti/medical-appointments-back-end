@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
+  title: Medical Appointments Wizard API
   version: v1
 security:
   - bearerAuth: []
