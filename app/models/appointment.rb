@@ -3,5 +3,4 @@ class Appointment < ApplicationRecord
   belongs_to :doctor
 
   validates :appointment_time, presence: true
-  validates :city, presence: true
 end
