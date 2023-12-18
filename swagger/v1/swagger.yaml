@@ -125,9 +125,12 @@ paths:
                 appointment_time:
                   type: string
                   format: date-time
+                city:
+                  type: string
               required:
                 - doctor_id
                 - appointment_time
+                - city
   "/api/v1/appointments/{id}":
     parameters:
       - name: id
@@ -148,10 +151,10 @@ paths:
           description: successful
 
 servers:
-  - url: https://{defaultHost}
+  - url: http://{defaultHost}
     variables:
       defaultHost:
-        default: medical-appointments-booking-wizard.onrender.com
+        default: 'localhost:3000'
 
 components:
   securitySchemes:

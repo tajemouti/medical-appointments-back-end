@@ -4,7 +4,7 @@ class Api::V1::AuthController < ApplicationController
 
     if user&.authenticate(params[:password])
       token = user.generate_jwt
-      render json: { token: }
+      render json: { user_id: user.id, username: user.username, token: }, status: :created
     else
       head :unauthorized
     end

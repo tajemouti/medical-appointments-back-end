@@ -2,8 +2,8 @@ class Api::V1::AppointmentsController < ApplicationController
   before_action :authorize_request
 
   def index
-    @appointments = @current_user.appointments
-    render json: @appointments
+    @appointments = @current_user.appointments.includes(:doctor)
+    render json: @appointments.as_json(methods: :doctor_name)
   end
 
   def create
