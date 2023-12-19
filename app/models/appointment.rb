@@ -6,6 +6,6 @@ class Appointment < ApplicationRecord
   validates :city, presence: true
 
   def doctor_name
-    doctor.name if doctor
+    doctor&.name
   end
 end
