@@ -20,7 +20,7 @@ RSpec.describe Api::V1::AppointmentsController, type: :controller do
       let(:doctor) { create(:doctor) }
 
       it 'creates a new appointment' do
-        post :create, params: { appointment: { appointment_time: DateTime.now, doctor_id: doctor.id } }
+        post :create, params: { appointment: { appointment_time: DateTime.now, city: 'Nairobi', doctor_id: doctor.id } }
         expect(response).to have_http_status(:created)
         expect(Appointment.count).to eq(1)
       end

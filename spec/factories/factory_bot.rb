@@ -35,6 +35,7 @@ FactoryBot.define do
 
   factory :appointment do
     appointment_time { Faker::Time.forward(days: 23, period: :evening) }
+    city { Faker::Address.city }
     association :user
     association :doctor
   end

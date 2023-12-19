@@ -13,7 +13,7 @@ RSpec.describe 'api/v1/auth', type: :request do
         required: %w[username password]
       }
 
-      response '200', 'successful' do
+      response '201', 'successful' do
         let(:user) { FactoryBot.create(:user) }
         let(:login_params) { { username: user.username, password: user.password } }
 
