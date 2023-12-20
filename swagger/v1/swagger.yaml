@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.1
 info:
-  title: API V1
+  title: Medical Appointments Wizard API
   version: v1
 security:
   - bearerAuth: []
@@ -125,9 +125,12 @@ paths:
                 appointment_time:
                   type: string
                   format: date-time
+                city:
+                  type: string
               required:
                 - doctor_id
                 - appointment_time
+                - city
   "/api/v1/appointments/{id}":
     parameters:
       - name: id
