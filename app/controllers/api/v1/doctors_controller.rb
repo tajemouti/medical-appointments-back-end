@@ -22,8 +22,11 @@ class Api::V1::DoctorsController < ApplicationController
   end
 
   def destroy
-    @doctor.destroy
-    render json: { message: 'Doctor deleted successfully.' }
+    if @doctor.destroy
+      render json: { message: 'Doctor deleted successfully.' }
+    else
+      render json: { errors: @doctor.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   private
