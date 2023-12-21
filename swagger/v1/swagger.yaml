@@ -1,0 +1,164 @@
+---
+openapi: 3.0.1
+info:
+  title: Medical Appointments Wizard API
+  version: v1
+security:
+  - bearerAuth: []
+paths:
+  "/api/v1/users":
+    post:
+      summary: create user
+      responses:
+        '201':
+          description: user created
+        '422':
+          description: unprocessable entity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    password:
+                      type: string
+                  required:
+                    - username
+                    - password
+              required:
+                - user
+
+  "/api/v1/login":
+    post:
+      summary: login auth
+      responses:
+        '200':
+          description: successful
+        '401':
+          description: unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              required:
+                - username
+                - password
+
+  "/api/v1/doctors":
+    get:
+      summary: list doctors
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create doctor
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                picture:
+                  type: string
+                speciality:
+                  type: string
+                address:
+                  type: string
+              required:
+                - name
+                - picture
+                - speciality
+                - address
+  "/api/v1/doctors/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: show doctor
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete doctor
+      responses:
+        '200':
+          description: successful
+  "/api/v1/appointments":
+    get:
+      summary: list appointments
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create appointment
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                doctor_id:
+                  type: integer
+                appointment_time:
+                  type: string
+                  format: date-time
+                city:
+                  type: string
+              required:
+                - doctor_id
+                - appointment_time
+                - city
+  "/api/v1/appointments/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: show appointment
+      responses:
+        '200':
+          description: successful
+    delete:
+      summary: delete appointment
+      responses:
+        '200':
+          description: successful
+
+servers:
+  - url: https://{defaultHost}
+    variables:
+      defaultHost:
+        default: medical-appointments-booking-wizard.onrender.com
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

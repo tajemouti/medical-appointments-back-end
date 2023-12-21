@@ -1,0 +1,18 @@
+databases:
+  - name: medical-appointments-booking
+    databaseName: medical_appointments_booking
+    user: medical_appointments_booking_user
+
+services:
+  - type: web
+    name: medical-appointments-booking-wizard
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: medical_appointments_booking
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
