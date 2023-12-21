@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
   def generate_jwt
-    JWT.encode({ id:, exp: 1.day.from_now.to_i }, Rails.application.secret_key_base)
+    JWT.encode({ id:, exp: 365.day.from_now.to_i }, Rails.application.secret_key_base)
   end
 
   def self.from_jwt(token)
