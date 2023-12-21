@@ -7,6 +7,7 @@
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
   - [🚀 Live Demo](#live-demo)
+  - [Kanban Board](#kanban-board)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -21,9 +22,9 @@
 - [🙏 Acknowledgements](#acknowledgements)
 - [📝 License](#license)
 
-# 📖 Medical Appointments Back-end <a name="about-project"></a>
+# 📖 Health Clinic API <a name="about-project"></a>
 
-**Medical Appointments Back-end** This repository contains the Rails back-end API for the "Doctor Appointments" capstone project. The API serves as the foundation for user authentication, doctor management, appointment reservations, and related functionalities. It utilizes PostgreSQL as the database and is designed to be a robust and secure backend system. The API exposes endpoints for user login, doctor listing, doctor details, reservation creation, and user reservation listing. Additionally, it implements features such as marking a doctor as removed and comprehensive documentation for seamless integration with the front-end.
+**Health Clinic API** This repository contains the Rails back-end API for the "Doctor Appointments" capstone project. The API serves as the foundation for user authentication, doctor management, appointment reservations, and related functionalities. It utilizes PostgreSQL as the database and is designed to be a robust and secure backend system. The API exposes endpoints for user login, doctor listing, doctor details, reservation creation, and user reservation listing. Additionally, it implements features such as marking a doctor as removed and comprehensive documentation for seamless integration with the front-end.
 
 ## 🛠 Built With <a name="built-with"></a>
 Ruby on Rails, Visual Studia Code, WSL
@@ -44,6 +45,11 @@ Ruby on Rails, Visual Studia Code, WSL
 ## 🚀 Live Demo <a name="live-demo"></a>
 
 - [Live Demo Link](https://medical-appointments-booking-wizard.onrender.com/)
+
+## Kanban Board <a name="kanban-board"></a>
+
+- Kanban board [Link](https://github.com/users/tajemouti/projects/2/).
+- Kanban board initial state [screenshots](https://drive.google.com/drive/folders/11Uh-CsI_r65uAamgyMZMkqwdepEgTCUx?usp=sharing).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
